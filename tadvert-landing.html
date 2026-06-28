@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tadvert — Marketing for Coaching Institutes</title>
+<style>
+  :root {
+    --navy: #0a1128;
+    --navy-light: #131c3d;
+    --navy-card: #161f44;
+    --gold: #d4af37;
+    --gold-light: #f0d878;
+    --text-light: #e8e6e1;
+    --text-muted: #9aa0b4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--navy);
+    color: var(--text-light);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10, 17, 40, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--gold);
+  }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 80px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.08), transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.06), transparent 50%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at 50% 40%, black 0%, transparent 70%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--gold-light);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 28px;
+    animation: fadeInUp 0.8s ease both;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    animation: fadeInUp 0.8s ease 0.1s both;
+  }
+  h1 .gold-text {
+    color: var(--gold);
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p.sub {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 620px;
+    margin: 0 auto 40px;
+    animation: fadeInUp 0.8s ease 0.2s both;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease 0.3s both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), #b8932c);
+    color: var(--navy);
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+  }
+  .btn-secondary {
+    border: 1px solid rgba(232, 230, 225, 0.25);
+    color: var(--text-light);
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .btn-secondary:hover {
+    background: rgba(232, 230, 225, 0.06);
+    border-color: rgba(212, 175, 55, 0.4);
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 8px); }
+  }
+
+  /* SECTION GENERIC */
+  section {
+    padding: 110px 0;
+    position: relative;
+  }
+  .section-label {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+    text-align: center;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 60px;
+    font-size: 1.05rem;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* PROBLEM */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .problem-card {
+    background: var(--navy-card);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .problem-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 175, 55, 0.35);
+  }
+  .problem-icon {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  .problem-card h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    color: var(--text-light);
+  }
+  .problem-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* SERVICES */
+  .services {
+    background: var(--navy-light);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .service-card {
+    background: var(--navy-card);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 18px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  }
+  .service-num {
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .service-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .service-card p {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  /* WHY */
+  .why-wrap {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  .why-text { flex: 1; }
+  .why-text h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+  .why-text p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    font-size: 15.5px;
+  }
+  .why-stats {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .stat-box {
+    background: var(--navy-card);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .stat-box .num {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .stat-box .label {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  /* PROCESS */
+  .process-line {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .process-step {
+    text-align: center;
+    position: relative;
+  }
+  .step-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #b8932c);
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 22px;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+  }
+  .process-step h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  .process-step p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: radial-gradient(ellipse at center, rgba(212,175,55,0.1), transparent 60%);
+    text-align: center;
+  }
+  .final-cta h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    margin-bottom: 18px;
+  }
+  .final-cta p {
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    font-size: 16px;
+  }
+  .whatsapp-btn {
+    background: #25D366;
+    color: #0a1128;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 18px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .whatsapp-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 16px 40px rgba(37, 211, 102, 0.5);
+  }
+
+  footer {
+    border-top: 1px solid rgba(212,175,55,0.1);
+    padding: 36px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  footer .logo {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 720px) {
+    .problem-grid, .services-grid, .process-line { grid-template-columns: 1fr; }
+    .why-wrap { flex-direction: column; }
+    .why-stats { width: 100%; }
+    section { padding: 70px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">TADVERT</div>
+    <a class="nav-cta" href="#cta">Book Free Audit</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="container hero-content">
+    <span class="badge">★ Marketing built for coaching institutes</span>
+    <h1>Fill your next batch<br>with students who <span class="gold-text">actually enroll.</span></h1>
+    <p class="sub">Tadvert runs social media & paid ads exclusively for coaching institutes — so your admissions don't depend on word-of-mouth anymore.</p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="#cta">Book a Free Audit Call →</a>
+      <a class="btn-secondary" href="#services">See What We Do</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll ↓</div>
+</section>
+
+<section id="problem">
+  <div class="container">
+    <span class="section-label reveal">The Problem</span>
+    <h2 class="section-title reveal">Most institutes are leaving admissions on the table</h2>
+    <p class="section-sub reveal">Great teaching doesn't guarantee a full batch. Here's what's quietly costing institutes students every season.</p>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="problem-icon">📉</div>
+        <h3>Inconsistent admissions</h3>
+        <p>Batches fill based on referrals and luck, not a repeatable system — so every season feels uncertain.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">📱</div>
+        <h3>Weak online presence</h3>
+        <p>Parents and students check Instagram before they check your reputation. A dead or inactive page costs trust instantly.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">🎯</div>
+        <h3>Competitors are running ads</h3>
+        <p>Institutes nearby are already running Meta ads and capturing the students who would've come to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="container">
+    <span class="section-label reveal">What We Do</span>
+    <h2 class="section-title reveal">Everything your institute needs to look (and get) full</h2>
+    <p class="section-sub reveal">No generic social media fluff — every deliverable is built around one goal: more admissions.</p>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <h3>Social Media Management</h3>
+        <p>Consistent, professional Instagram & Facebook presence — content that builds trust with parents and students browsing before enrolling.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <h3>Meta Lead-Gen Ads</h3>
+        <p>Targeted ad campaigns built to capture students actively searching for coaching in your city — not just generic awareness.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <h3>Admission Funnels</h3>
+        <p>From ad click to enrollment — we build the WhatsApp/landing page flow that turns interest into a walk-in or sign-up.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">04</div>
+        <h3>Performance Reporting</h3>
+        <p>Clear, simple updates on what's working — leads generated, cost per lead, and what we're optimizing next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="why-wrap">
+      <div class="why-text reveal">
+        <h2>We only work with <span style="color:var(--gold)">coaching institutes.</span> That's the whole point.</h2>
+        <p>Most agencies treat every client the same. Tadvert doesn't — we specialize exclusively in coaching institutes, which means we understand admission cycles, parent psychology, and what actually makes a student choose one institute over another.</p>
+        <p>That focus means faster results and campaigns that speak the right language from day one — no generic templates, no learning curve at your expense.</p>
+      </div>
+      <div class="why-stats reveal">
+        <div class="stat-box">
+          <span class="num">100%</span>
+          <span class="label">Focused on coaching institutes</span>
+        </div>
+        <div class="stat-box">
+          <span class="num">1:1</span>
+          <span class="label">Dedicated attention per client</span>
+        </div>
+        <div class="stat-box">
+          <span class="num">7-day</span>
+          <span class="label">Onboarding to first content</span>
+        </div>
+        <div class="stat-box">
+          <span class="num">0 ₹</span>
+          <span class="label">Cost for the initial audit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="services">
+  <div class="container">
+    <span class="section-label reveal">How It Works</span>
+    <h2 class="section-title reveal">Three steps to a fuller batch</h2>
+    <p class="section-sub reveal">Simple, transparent process — no jargon, no long contracts to start.</p>
+    <div class="process-line">
+      <div class="process-step reveal">
+        <div class="step-circle">1</div>
+        <h3>Free Audit</h3>
+        <p>We look at your current online presence and admissions process, and tell you honestly what's working and what isn't.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-circle">2</div>
+        <h3>Strategy & Content</h3>
+        <p>We build a content and ad strategy tailored to your institute, subjects, and target student profile.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-circle">3</div>
+        <h3>Run & Optimize</h3>
+        <p>We launch, track results closely, and continuously optimize so your cost per admission keeps improving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta" class="final-cta">
+  <div class="container">
+    <h2 class="reveal">Ready to fill your next batch?</h2>
+    <p class="reveal">Book a free, no-obligation audit call on WhatsApp — takes 2 minutes to start.</p>
+    <a class="whatsapp-btn reveal" href="https://wa.me/919123142169?text=Hi%20Tadvert%2C%20I%27d%20like%20to%20know%20more%20about%20growing%20admissions%20for%20my%20institute." target="_blank">
+      💬 Chat on WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="logo" style="color:var(--gold); font-weight:800;">TADVERT</span>
+    Marketing for coaching institutes that want fuller batches, not just followers.
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
